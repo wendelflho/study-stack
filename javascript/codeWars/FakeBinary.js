@@ -1,6 +1,6 @@
 function fakeBin(x) {
     // Solução 1
-    // return x.split('').map(n => n < 5 ? 0 : 1).join('');
+    return x.split('').map(n => n < 5 ? 0 : 1).join('');
 
     // Solução 2
     // let newString = '';
