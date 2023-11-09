@@ -1,14 +1,5 @@
 function removeEveryOther(arr) {
-    let newArray = [];
-
-    for (let i = 0; i < arr.length; i++) {
-        console.log(arr[i]);
-        newArray = arr.splice(i % 2 !== 0, 1);
-    }
-
-    console.log(newArray);
-
-    return newArray;
+    return arr.filter((_, index) => index % 2 === 0);
 }
 
 let array = ['Keep', 'Remove', 'Keep', 'Remove', 'Keep'];
