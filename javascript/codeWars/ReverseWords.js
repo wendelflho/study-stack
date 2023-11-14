@@ -1,15 +1,9 @@
 function reverseWords(str) {
-    let x = str.replace(/[^A-Za-z0-9]+/g, ' ');
+    let words = str.split(' ');
 
-    let newArray = x.trim().split(' ');
+    let newArray = words.map(word => word.split('').reverse().join(''));
 
-    let teste = '';
-
-    for (let i = newArray.length - 1; i > -1; i--) {
-        teste += newArray[i];
-    }
-
-    return teste;
+    return newArray.join(' ');
 }
 
 let sentence = 'This is an example!';
