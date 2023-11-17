@@ -1,21 +1,17 @@
-<!--<button (click)="toggleCollapse()" type="button" class="btn btn-primary"-->
-<!--        [attr.aria-expanded]="isCollapsed" aria-controls="collapseBasic">Display Details-->
-<!--</button>-->
+<div class="text-center">
+  <button (click)="toggleCollapse()" type="button" class="btn btn-primary"
+          [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">Display Details
+  </button>
 
-<!--<div id="collapseBasic" [collapse]="isCollapsed">-->
-<!--  <div class="password">-->
-<!--    Secret password = tuna-->
-<!--  </div>-->
-<!--</div>-->
-<button (click)="toggleCollapse()" class="btn btn-primary">Display Details
-</button>
-
-<div *ngIf="isCollapsed">
-  <div class="password">
-    Secret password = tuna
+  <div id="collapseBasic" [collapse]="!isCollapsed">
+    <div class="password">
+      Secret password = tuna
+    </div>
   </div>
+
+  <div *ngFor="let logItem of log"
+       [ngStyle]="{backgroundColor: logItem > 4 ? 'blue' : 'transparent'}"
+       [ngClass]="{'white-text': logItem > 4}">
+    {{ logItem }}</div>
 </div>
 
-<div *ngFor="let logItem of log"
-     [ngStyle]="{backgroundColor: getBackgroundColor()}"
-     [ngClass]="{numbers: getTextColor()}">{{ logItem }}</div>
