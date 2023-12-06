@@ -9,9 +9,11 @@
     </div>
   </div>
 
-  <div *ngFor="let logItem of log"
-       [ngStyle]="{backgroundColor: logItem > 4 ? 'blue' : 'transparent'}"
-       [ngClass]="{'white-text': logItem > 4}">
-    {{ logItem }}</div>
+  <!-- Como o index começa em 0 é preciso verificar se é maior que 3 ou maior || igual a 4 -->
+  <div *ngFor="let logItem of log; let i = index"
+       [ngStyle]="{backgroundColor: i > 3 ? 'blue' : 'transparent'}"
+       [ngClass]="{'white-text': i > 3}"
+  >{{ logItem }}
+  </div>
 </div>
 
