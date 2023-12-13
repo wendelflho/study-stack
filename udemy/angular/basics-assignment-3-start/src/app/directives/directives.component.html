@@ -1,0 +1,19 @@
+<div class="text-center">
+  <button (click)="toggleCollapse()" type="button" class="btn btn-primary"
+          [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">Display Details
+  </button>
+
+  <div id="collapseBasic" [collapse]="!isCollapsed">
+    <div class="password">
+      Secret password = tuna
+    </div>
+  </div>
+
+  <!-- Como o index começa em 0 é preciso verificar se é maior que 3 ou maior || igual a 4 -->
+  <div *ngFor="let logItem of log; let i = index"
+       [ngStyle]="{backgroundColor: i > 3 ? 'blue' : 'transparent'}"
+       [ngClass]="{'white-text': i > 3}"
+  >{{ logItem }}
+  </div>
+</div>
+
