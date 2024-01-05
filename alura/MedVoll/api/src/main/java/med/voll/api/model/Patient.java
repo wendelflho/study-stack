@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import med.voll.api.model.dto.PatientDTO;
+import med.voll.api.model.dto.PatientUpdateDTO;
 import org.hibernate.validator.constraints.br.CPF;
 
 @Table(name = "patients")
@@ -30,11 +31,30 @@ public class Patient {
     @Embedded
     private Address address;
 
+    private Boolean active;
+
     public Patient(PatientDTO patientDTO) {
+        this.active = true;
         this.name = patientDTO.name();
         this.email = patientDTO.email();
         this.phone = patientDTO.phone();
         this.taxId = patientDTO.taxId();
         this.address = new Address(patientDTO.address());
+    }
+
+    public void updateInfo(PatientUpdateDTO patientUpdate) {
+        if (patientUpdate.name() != null) {
+            this.name = patientUpdate.name();
+        }
+        if (patientUpdate.phone() != null) {
+            this.phone = patientUpdate.phone();
+        }
+        if (patientUpdate.address() != null) {
+            this.address.updateInfo(patientUpdate.address());
+        }
+    }
+
+    public void delete() {
+        this.active = false;
     }
 }

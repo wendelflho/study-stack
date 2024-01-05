@@ -3,6 +3,7 @@ package med.voll.api.service;
 import med.voll.api.model.Physician;
 import med.voll.api.model.dto.PhysicianDTO;
 import med.voll.api.model.dto.PhysicianListDTO;
+import med.voll.api.model.dto.PhysicianUpdateDTO;
 import med.voll.api.repository.PhysicianRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,7 +27,17 @@ public class PhysicianService {
         * não precisa do toList também
         * */
         return physicianRepository
-                .findAll(pageable)
+                .findAllByActiveTrue(pageable)
                 .map(PhysicianListDTO::new);
+    }
+
+    public void updatePhysician(PhysicianUpdateDTO physicianUpdate) {
+        var physician = physicianRepository.getReferenceById(physicianUpdate.id());
+        physician.updateInfo(physicianUpdate);
+    }
+
+    public void deletePhysician(Long id) {
+        var physician = physicianRepository.getReferenceById(id);
+        physician.delete();
     }
 }

@@ -33,4 +33,28 @@ public class Address {
         this.number = address.number();
         this.complement = address.complement();
     }
+
+    public void updateInfo(AddressDTO address) {
+        if (address.publicPlace() != null) {
+            this.publicPlace = address.publicPlace();
+        }
+        if (address.district() != null) {
+            this.district = address.district();
+        }
+        if (address.zipCode() != null) {
+            this.zipCode = address.zipCode();
+        }
+        if (address.city() != null) {
+            this.city = address.city();
+        }
+        if (address.fu() != null) {
+            this.fu = address.fu();
+        }
+        if (address.number() != null) {
+            this.number = address.number();
+        }
+        if (address.complement() != null) {
+            this.complement = address.complement();
+        }
+    }
 }

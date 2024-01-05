@@ -2,6 +2,7 @@ package med.voll.api.model.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import med.voll.api.model.Address;
 
 public record AddressDTO(
 
@@ -25,4 +26,8 @@ public record AddressDTO(
 
         String complement
 ) {
+        public Address toAddress(Address address) {
+                address.updateInfo(this);
+                return address;
+        }
 }

@@ -4,6 +4,8 @@ import jakarta.validation.Valid;
 import med.voll.api.model.Physician;
 import med.voll.api.model.dto.PhysicianDTO;
 import med.voll.api.model.dto.PhysicianListDTO;
+import med.voll.api.model.dto.PhysicianUpdateDTO;
+import med.voll.api.repository.PhysicianRepository;
 import med.voll.api.service.PhysicianService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,7 +27,6 @@ public class PhysicianController {
     @Transactional
     public ResponseEntity<Physician> create(@RequestBody @Valid PhysicianDTO physicianDTO) {
         Physician physician = physicianService.createPhysician(physicianDTO);
-
         return ResponseEntity.status(HttpStatus.CREATED).body(physician);
     }
 
@@ -33,6 +34,22 @@ public class PhysicianController {
     public ResponseEntity<Page<PhysicianListDTO>> physicianList(
             @PageableDefault(size = 10, sort = {"name"}) Pageable pageable
     ) {
-        return ResponseEntity.ok(physicianService.physicianList(pageable));
+        Page<PhysicianListDTO> body = physicianService.physicianList(pageable);
+        return ResponseEntity.ok(body);
     }
+
+    @PutMapping
+    @Transactional
+    public ResponseEntity<Physician> updatePhysician(@RequestBody @Valid PhysicianUpdateDTO physicianUpdate) {
+        physicianService.updatePhysician(physicianUpdate);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<Physician> deletePhysician(@PathVariable Long id) {
+        physicianService.deletePhysician(id);
+        return ResponseEntity.ok().build();
+    }
+
 }
