@@ -31,9 +31,10 @@ public class PhysicianService {
                 .map(PhysicianListDTO::new);
     }
 
-    public void updatePhysician(PhysicianUpdateDTO physicianUpdate) {
+    public Physician updatePhysician(PhysicianUpdateDTO physicianUpdate) {
         var physician = physicianRepository.getReferenceById(physicianUpdate.id());
         physician.updateInfo(physicianUpdate);
+        return physician;
     }
 
     public void deletePhysician(Long id) {

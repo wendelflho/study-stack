@@ -3,6 +3,7 @@ package med.voll.api.controller;
 import jakarta.validation.Valid;
 import med.voll.api.model.Physician;
 import med.voll.api.model.dto.PhysicianDTO;
+import med.voll.api.model.dto.PhysicianDetailDTO;
 import med.voll.api.model.dto.PhysicianListDTO;
 import med.voll.api.model.dto.PhysicianUpdateDTO;
 import med.voll.api.repository.PhysicianRepository;
@@ -34,22 +35,22 @@ public class PhysicianController {
     public ResponseEntity<Page<PhysicianListDTO>> physicianList(
             @PageableDefault(size = 10, sort = {"name"}) Pageable pageable
     ) {
-        Page<PhysicianListDTO> body = physicianService.physicianList(pageable);
-        return ResponseEntity.ok(body);
+        Page<PhysicianListDTO> page = physicianService.physicianList(pageable);
+        return ResponseEntity.ok(page);
     }
 
     @PutMapping
     @Transactional
-    public ResponseEntity<Physician> updatePhysician(@RequestBody @Valid PhysicianUpdateDTO physicianUpdate) {
-        physicianService.updatePhysician(physicianUpdate);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<PhysicianDetailDTO> updatePhysician(@RequestBody @Valid PhysicianUpdateDTO physicianUpdate) {
+        var physician = physicianService.updatePhysician(physicianUpdate);
+        return ResponseEntity.ok(new PhysicianDetailDTO(physician));
     }
 
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity<Physician> deletePhysician(@PathVariable Long id) {
         physicianService.deletePhysician(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 
 }
