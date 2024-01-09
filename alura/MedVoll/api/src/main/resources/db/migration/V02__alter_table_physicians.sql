@@ -1,0 +1,3 @@
+ALTER TABLE physicians
+ALTER COLUMN number
+DROP NOT NULL;
