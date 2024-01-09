@@ -41,4 +41,8 @@ public class PhysicianService {
         var physician = physicianRepository.getReferenceById(id);
         physician.delete();
     }
+
+    public Physician detailPhysician(Long id) {
+        return physicianRepository.getReferenceById(id);
+    }
 }
