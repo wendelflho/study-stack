@@ -1,4 +1,4 @@
-package med.voll.api.model;
+package med.voll.api.domain.physician;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

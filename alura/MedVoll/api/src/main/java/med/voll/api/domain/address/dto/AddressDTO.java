@@ -1,8 +1,8 @@
-package med.voll.api.model.dto;
+package med.voll.api.domain.address.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-import med.voll.api.model.Address;
+import med.voll.api.domain.address.Address;
 
 public record AddressDTO(
 

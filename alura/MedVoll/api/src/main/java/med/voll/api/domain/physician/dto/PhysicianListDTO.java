@@ -1,7 +1,7 @@
-package med.voll.api.model.dto;
+package med.voll.api.domain.physician.dto;
 
-import med.voll.api.model.Physician;
-import med.voll.api.model.Specialty;
+import med.voll.api.domain.physician.Physician;
+import med.voll.api.domain.physician.Specialty;
 
 public record PhysicianListDTO(
         Long id,

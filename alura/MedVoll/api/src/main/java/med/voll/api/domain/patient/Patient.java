@@ -1,12 +1,13 @@
-package med.voll.api.model;
+package med.voll.api.domain.patient;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import med.voll.api.model.dto.PatientDTO;
-import med.voll.api.model.dto.PatientUpdateDTO;
+import med.voll.api.domain.address.Address;
+import med.voll.api.domain.patient.dto.PatientDTO;
+import med.voll.api.domain.patient.dto.PatientUpdateDTO;
 import org.hibernate.validator.constraints.br.CPF;
 
 @Table(name = "patients")

@@ -1,4 +1,6 @@
-package med.voll.api.model.dto;
+package med.voll.api.domain.patient.dto;
+
+import med.voll.api.domain.address.dto.AddressDTO;
 
 public record PatientDTO(
         String name,

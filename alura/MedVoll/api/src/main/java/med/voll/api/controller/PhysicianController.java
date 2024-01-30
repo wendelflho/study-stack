@@ -1,13 +1,13 @@
 package med.voll.api.controller;
 
 import jakarta.validation.Valid;
-import med.voll.api.model.Physician;
-import med.voll.api.model.dto.PhysicianDTO;
-import med.voll.api.model.dto.PhysicianDetailDTO;
-import med.voll.api.model.dto.PhysicianListDTO;
-import med.voll.api.model.dto.PhysicianUpdateDTO;
+import lombok.RequiredArgsConstructor;
+import med.voll.api.domain.physician.Physician;
+import med.voll.api.domain.physician.dto.PhysicianDTO;
+import med.voll.api.domain.physician.dto.PhysicianDetailDTO;
+import med.voll.api.domain.physician.dto.PhysicianListDTO;
+import med.voll.api.domain.physician.dto.PhysicianUpdateDTO;
 import med.voll.api.service.PhysicianService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(value = "physician")
 public class PhysicianController {
 
-    @Autowired
-    private PhysicianService physicianService;
+    private final PhysicianService physicianService;
 
     @PostMapping
     @Transactional

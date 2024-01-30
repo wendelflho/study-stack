@@ -1,20 +1,20 @@
 package med.voll.api.service;
 
-import med.voll.api.model.Patient;
-import med.voll.api.model.dto.PatientDTO;
-import med.voll.api.model.dto.PatientListDTO;
-import med.voll.api.model.dto.PatientUpdateDTO;
+import lombok.RequiredArgsConstructor;
+import med.voll.api.domain.patient.Patient;
+import med.voll.api.domain.patient.dto.PatientDTO;
+import med.voll.api.domain.patient.dto.PatientListDTO;
+import med.voll.api.domain.patient.dto.PatientUpdateDTO;
 import med.voll.api.repository.PatientRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class PatientService {
 
-    @Autowired
-    PatientRepository patientRepository;
+    private final PatientRepository patientRepository;
 
     public Patient createPatient(PatientDTO patientDTO) {
         Patient patient = new Patient(patientDTO);

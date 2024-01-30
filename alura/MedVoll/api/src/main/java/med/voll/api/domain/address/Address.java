@@ -1,11 +1,11 @@
-package med.voll.api.model;
+package med.voll.api.domain.address;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import med.voll.api.model.dto.AddressDTO;
+import med.voll.api.domain.address.dto.AddressDTO;
 
 @Embeddable
 @Getter

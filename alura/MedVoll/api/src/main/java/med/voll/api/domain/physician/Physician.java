@@ -1,9 +1,10 @@
-package med.voll.api.model;
+package med.voll.api.domain.physician;
 
 import jakarta.persistence.*;
 import lombok.*;
-import med.voll.api.model.dto.PhysicianDTO;
-import med.voll.api.model.dto.PhysicianUpdateDTO;
+import med.voll.api.domain.address.Address;
+import med.voll.api.domain.physician.dto.PhysicianDTO;
+import med.voll.api.domain.physician.dto.PhysicianUpdateDTO;
 
 @Table(name = "physicians")
 @Entity(name = "Physician")
