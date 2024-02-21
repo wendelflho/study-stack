@@ -1,20 +1,20 @@
 package med.voll.api.service;
 
-import med.voll.api.model.Physician;
-import med.voll.api.model.dto.PhysicianDTO;
-import med.voll.api.model.dto.PhysicianListDTO;
-import med.voll.api.model.dto.PhysicianUpdateDTO;
+import lombok.RequiredArgsConstructor;
+import med.voll.api.domain.physician.Physician;
+import med.voll.api.domain.physician.dto.PhysicianDTO;
+import med.voll.api.domain.physician.dto.PhysicianListDTO;
+import med.voll.api.domain.physician.dto.PhysicianUpdateDTO;
 import med.voll.api.repository.PhysicianRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class PhysicianService {
 
-    @Autowired
-    private PhysicianRepository physicianRepository;
+    private final PhysicianRepository physicianRepository;
 
     public Physician createPhysician(PhysicianDTO physicianDTO) {
         Physician physician = new Physician(physicianDTO);
@@ -31,13 +31,18 @@ public class PhysicianService {
                 .map(PhysicianListDTO::new);
     }
 
-    public void updatePhysician(PhysicianUpdateDTO physicianUpdate) {
+    public Physician updatePhysician(PhysicianUpdateDTO physicianUpdate) {
         var physician = physicianRepository.getReferenceById(physicianUpdate.id());
         physician.updateInfo(physicianUpdate);
+        return physician;
     }
 
     public void deletePhysician(Long id) {
         var physician = physicianRepository.getReferenceById(id);
         physician.delete();
+    }
+
+    public Physician detailPhysician(Long id) {
+        return physicianRepository.getReferenceById(id);
     }
 }
