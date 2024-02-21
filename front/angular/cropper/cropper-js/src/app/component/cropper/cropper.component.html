@@ -1,0 +1,50 @@
+<div class="modal-content">
+    <div class="modal-body">
+      <h5>Edite sua foto</h5>
+      <div class="cropper-wrapper">
+        <div class="loading-block" *ngIf="isLoading">
+          <div class="spinner"></div>
+        </div>
+  
+        <div class="alert alert-warning" *ngIf="error">{{ error }}</div>
+  
+        <div class="cropper">
+          <img #image [src]="imageUrl" alt="Profile Image" (load)="initCropper($event)" (error)="imageLoadError($event)"/>
+        </div>
+      </div>
+    </div>
+    <div class="options">
+      <button (click)="zoomIn()">
+        <mat-icon fontIcon="right-arrow"></mat-icon>
+        <!-- <app-cred-icon name="arrow-left" size="n1"></app-cred-icon> -->
+      </button>
+      <button (click)="zoomOut()">
+        <!-- <app-cred-icon name="arrow-left" size="n1"></app-cred-icon> -->
+      </button>
+      <button (click)="rotateRight()">
+        <!-- <app-cred-icon name="arrow-left" size="n1"></app-cred-icon> -->
+      </button>
+      <button (click)="rotateLeft()">
+        <!-- <app-cred-icon name="arrow-left" size="n1"></app-cred-icon> -->
+      </button>
+      <button (click)="goRight()">
+        <!-- <app-cred-icon name="arrow-left" size="n1"></app-cred-icon> -->
+      </button>
+      <button (click)="goLeft()">
+        <!-- <app-cred-icon name="arrow-left" size="n1"></app-cred-icon> -->
+      </button>
+      <button (click)="flipHorizontal()">
+        <!-- <app-cred-icon name="arrow-left" size="n1"></app-cred-icon> -->
+      </button>
+      <button (click)="flipVertical()">
+        <!-- <app-cred-icon name="arrow-left" size="n1"></app-cred-icon> -->
+      </button>
+      <button (click)="reset()">
+        <!-- <app-cred-icon name="arrow-left" size="n1"></app-cred-icon> -->
+      </button>
+    </div>
+    <div class="actions">
+      <p>Cancel</p>
+      <p>Save</p>
+    </div>
+  </div>
