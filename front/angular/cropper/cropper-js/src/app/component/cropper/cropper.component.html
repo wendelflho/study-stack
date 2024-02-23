@@ -1,50 +1,59 @@
 <div class="modal-content">
-    <div class="modal-body">
-      <h5>Edite sua foto</h5>
-      <div class="cropper-wrapper">
-        <div class="loading-block" *ngIf="isLoading">
-          <div class="spinner"></div>
-        </div>
-  
-        <div class="alert alert-warning" *ngIf="error">{{ error }}</div>
-  
-        <div class="cropper">
-          <img #image [src]="imageUrl" alt="Profile Image" (load)="initCropper($event)" (error)="imageLoadError($event)"/>
-        </div>
+  <div class="modal-body">
+    <h5>Edite sua foto</h5>
+    <div class="cropper-wrapper">
+      <div class="loading-block" *ngIf="isLoading">
+        <div class="spinner"></div>
+      </div>
+
+      <div class="alert alert-warning" *ngIf="error">{{ error }}</div>
+
+      <!-- <input id="{{isCover?'fileMidiaCoverImage':'fileMidia'}}" type='file'
+        (change)="fileChangeEvent($event)" accept="image/png, image/jpg, image/jpeg"> -->
+      <div class="cropper">
+        <img #image [src]="imageUrl" alt="Profile Image" (load)="initCropper($event)" (error)="imageLoadError($event)"/>
       </div>
     </div>
-    <div class="options">
-      <button (click)="zoomIn()">
-        <mat-icon fontIcon="right-arrow"></mat-icon>
-        <!-- <app-cred-icon name="arrow-left" size="n1"></app-cred-icon> -->
-      </button>
-      <button (click)="zoomOut()">
-        <!-- <app-cred-icon name="arrow-left" size="n1"></app-cred-icon> -->
-      </button>
-      <button (click)="rotateRight()">
-        <!-- <app-cred-icon name="arrow-left" size="n1"></app-cred-icon> -->
-      </button>
-      <button (click)="rotateLeft()">
-        <!-- <app-cred-icon name="arrow-left" size="n1"></app-cred-icon> -->
-      </button>
-      <button (click)="goRight()">
-        <!-- <app-cred-icon name="arrow-left" size="n1"></app-cred-icon> -->
-      </button>
-      <button (click)="goLeft()">
-        <!-- <app-cred-icon name="arrow-left" size="n1"></app-cred-icon> -->
-      </button>
-      <button (click)="flipHorizontal()">
-        <!-- <app-cred-icon name="arrow-left" size="n1"></app-cred-icon> -->
-      </button>
-      <button (click)="flipVertical()">
-        <!-- <app-cred-icon name="arrow-left" size="n1"></app-cred-icon> -->
-      </button>
-      <button (click)="reset()">
-        <!-- <app-cred-icon name="arrow-left" size="n1"></app-cred-icon> -->
-      </button>
-    </div>
-    <div class="actions">
-      <p>Cancel</p>
-      <p>Save</p>
-    </div>
   </div>
+  <div class="options">
+    <button class="button-options" (click)="zoomIn()">
+      <mat-icon>zoom-in</mat-icon>
+    </button>
+
+    <button class="button-options" (click)="zoomOut()">
+      <mat-icon></mat-icon>
+    </button>
+
+    <button class="button-options" (click)="rotateRight()">
+      <mat-icon ></mat-icon>
+    </button>
+
+    <button class="button-options" (click)="rotateLeft()">
+      <mat-icon ></mat-icon>
+    </button>
+
+    <button class="button-options" (click)="goLeft()">
+      <mat-icon ></mat-icon>
+    </button>
+
+    <button class="button-options" (click)="goRight()">
+      <mat-icon ></mat-icon>
+    </button>
+
+    <button class="button-options" (click)="flipHorizontal()">
+      <mat-icon ></mat-icon>
+    </button>
+
+    <button class="button-options" (click)="flipVertical()">
+      <mat-icon ></mat-icon>
+    </button>
+
+    <button class="button-options" (click)="reset()">
+      <mat-icon ></mat-icon>
+    </button>
+  </div>
+  <div class="actions">
+    <button type="button" class="btn btn-outline-light" (click)="cancel()">Cancelar</button>
+    <button type="button" class="btn btn-primary" (click)="exportCanvas(true)">Confirmar</button>
+  </div>
+</div>

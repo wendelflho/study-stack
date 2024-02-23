@@ -1,19 +1,20 @@
-import { isPlatformBrowser } from '@angular/common';
 import {
   AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
   Inject,
-  Input,
+  Injector,
   OnDestroy,
+  OnInit,
   Output,
   PLATFORM_ID,
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
-import Cropper from 'cropperjs';
 import { BehaviorSubject } from 'rxjs';
+import Cropper from 'cropperjs';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 export interface ImageCropperSetting {
   width: number;
@@ -27,24 +28,38 @@ export interface ImageCropperResult {
   dataUrl?: string;
 }
 
+export interface DialogData {
+  imageUrl: string;
+  aspectRatio: number;
+  viewMode: number;
+  settings: ImageCropperSetting;
+  canvasOptions: Cropper.SetCanvasDataOptions;
+}
+
+export interface CroppedEvent {
+  base64?: string;
+  file?: File;
+}
+
 @Component({
   selector: 'app-cropper',
   templateUrl: './cropper.component.html',
   styleUrls: ["./cropper.component.scss"],
   encapsulation: ViewEncapsulation.None,
 })
-export class CropperComponent implements OnDestroy {
+export class CropperComponent implements OnInit, OnDestroy {
 
-  // private id$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+  private id$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-  @ViewChild('image') image!: ElementRef;
+  @ViewChild('image')
+  image!: ElementRef<HTMLImageElement>;
 
-  @Input() imageUrl: string = '';
-  @Input() settings: ImageCropperSetting = { width: 100, height: 100 };
-  @Input() canvasOptions: Cropper.SetCanvasDataOptions = {};
-  @Input() viewMode: number = 0;
-  @Input() aspectRatio: number = NaN;
-  @Input() imageChangedEvent: any = null;
+  public imageUrl!: string;
+  public settings: ImageCropperSetting = { width: 0, height: 0 };
+  public canvasOptions: Cropper.SetCanvasDataOptions = {};
+  public viewMode: number = 0;
+  public aspectRatio: number = NaN;
+  // @Input() imageChangedEvent: any;
 
   public cropperOptions: any = {};
   public isLoading: boolean = true;
@@ -56,35 +71,46 @@ export class CropperComponent implements OnDestroy {
 
   constructor(
     private elementRef: ElementRef,
-    @Inject(PLATFORM_ID) private platformId: string
-  ) { }
+    public dialogRef: MatDialogRef<CropperComponent>,
+    @Inject(PLATFORM_ID) private platformId: string,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,    
+  ) {
+  }
 
-  // public ngAfterViewInit(): void {
-  //   this.id$.next(`#${this.elementRef.nativeElement.id}`);
-  //   this.perform();
-  // }
+  ngOnInit(): void {
+    this.imageUrl = this.data.imageUrl;
+    this.aspectRatio = this.data.aspectRatio;
+    this.viewMode = this.data.viewMode;
+    this.settings = this.data.settings;
+    this.canvasOptions = this.data.canvasOptions;
+  }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     if (this.cropper) {
       this.cropper.destroy();
     }
   }
 
   // private perform(): void {
-  //   if (isPlatformBrowser(this.platformId)) {
-  //     import('cropperjs').then(
-  //       (module: any) => Optional.ofNullable(module)
-  //                         .map(mod => mod?.default)
-  //                         .ifPresent(cropper => this.initCropper(cropper))
-  //     );
-  //   }
+  //   this.platformService.ifBrowserThen(() => {
+  //     import('cropperjs').then();
+  //   });
   // }
 
-  public initCropper(ev: Event): void {
+  // private perform(): void {
+  //   this.platformService.ifBrowserThen(() => {
+  //     import('cropperjs').then(
+  //       (module: any) => Optional.ofNullable(module)
+  //                                 .map(mod => mod?.default)
+  //                                 .ifPresent(cropper => this.initCropper(cropper))
+  //     );
+  //   });
+  // }
+
+  public initCropper(ev: any): void {
+    console.log(ev);
 
     this.error = false;
-
-    // const image = this.image.nativeElement as HTMLImageElement;
 
     const image = ev.target as HTMLImageElement;
 
@@ -100,22 +126,19 @@ export class CropperComponent implements OnDestroy {
       }
     });
 
-    let aspectRatio = image.width / image.height;
-    // if (this.settings) {
-    //   const { width, height } = this.settings;
-    //   aspectRatio = width / height;
-    // };
+    let aspectRatio = this.aspectRatio || NaN;
+    if (this.settings) {
+      const { width, height } = this.settings;
+      aspectRatio = width / height;
+    };
 
     let viewMode = this.viewMode || 0;
     let autoCropArea = 1;
     this.cropperOptions = {
-      ...{
-        aspectRatio,
-        viewMode,
-        autoCropArea,
-        checkCrossOrigin: true,
-      },
-      ...this.cropperOptions,
+      aspectRatio: aspectRatio,
+      viewMode: viewMode,
+      autoCropArea: autoCropArea,
+      checkCrossOrigin: true,
     };
 
     if (this.cropper) {
@@ -123,6 +146,8 @@ export class CropperComponent implements OnDestroy {
     }
 
     this.cropper = new Cropper(image, this.cropperOptions);
+
+    console.log(this.cropper);
   }
 
   public exportCanvas(base64?: any) {
@@ -148,52 +173,61 @@ export class CropperComponent implements OnDestroy {
         canvas.toBlob((blob) => resolve({ blob }));
     });
 
+    console.log(data);
+
     //
     // Emit export data when promise is ready
     promise.then((res: any) => {
         this.export.emit({ ...data, ...res });
     });
+
+    this.dialogRef.close(this.cropper);
   }
 
   imageLoadError(event: any) {
     this.error = true;
     this.isLoading = false;
+    console.log(event);
   }
 
-  public zoomIn() {
+  public zoomIn(): void {
     this.cropper.zoom(0.1);
   }
 
-  public zoomOut() {
+  public zoomOut(): void {
     this.cropper.zoom(-0.1);
   }
 
-  public rotateLeft() {
+  public rotateLeft(): void {
     this.cropper.rotate(-45);
   }
 
-  public rotateRight() {
+  public rotateRight(): void {
     this.cropper.rotate(45);
   }
 
-  public flipHorizontal() {
+  public flipHorizontal(): void {
     this.cropper.scaleX(-this.cropper.getData().scaleX || -1);
   }
 
-  public flipVertical() {
+  public flipVertical(): void {
     this.cropper.scaleY(-this.cropper.getData().scaleY || -1);
   }
 
-  public goRight() {
+  public goLeft(): void {
     this.cropper.move(10, 0);
   }
 
-  public goLeft() {
+  public goRight(): void {
     this.cropper.move(-10, 0);
   }
 
-  public reset() {
+  public reset(): void {
     this.cropper.reset();
+  }
+
+  public cancel(): void {
+    this.dialogRef.close();
   }
 
 }
