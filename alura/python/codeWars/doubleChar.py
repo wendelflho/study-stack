@@ -1,5 +1,5 @@
 def double_char(s):
-   for element in s:
+   return ''.join(c * 2 for c in s)
       
 
 print(double_char('string'))

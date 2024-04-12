@@ -1,10 +1,10 @@
-package thread;
+package vo;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-abstract class ThreadPool<T> extends Thread {
+public abstract class ThreadPool<T> extends Thread {
 
     private static final Integer RANGE_INIT = 0;
 
@@ -24,12 +24,12 @@ abstract class ThreadPool<T> extends Thread {
         IntStream.range(RANGE_INIT, poolSize).forEach(this::initThreads);
     }
 
-    protected void initThreads(Integer identifier) {
+    private void initThreads(Integer identifier) {
         WorkerThread<T> worker = this.initializeThread(identifier);
         threads.add(worker);
         worker.start();
     }
 
-    abstract WorkerThread<T> initializeThread(Integer identifier);
+    protected abstract WorkerThread<T> initializeThread(Integer identifier);
 
 }
