@@ -1,7 +1,6 @@
 package med.voll.api.service;
 
 import lombok.RequiredArgsConstructor;
-<<<<<<< Updated upstream:alura/java/MedVoll/api/src/main/java/med/voll/api/service/AppointmentService.java
 import med.voll.api.domain.physician.Physician;
 import med.voll.api.domain.schedule.Schedule;
 import med.voll.api.domain.schedule.dto.ScheduleAppointmentDTO;
@@ -9,14 +8,11 @@ import med.voll.api.infra.exception.ValidateException;
 import med.voll.api.repository.PatientRepository;
 import med.voll.api.repository.PhysicianRepository;
 import med.voll.api.repository.ScheduleRepository;
-=======
->>>>>>> Stashed changes:alura/MedVoll/api/src/main/java/med/voll/api/service/AppointmentService.java
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class AppointmentService {
-<<<<<<< Updated upstream:alura/java/MedVoll/api/src/main/java/med/voll/api/service/AppointmentService.java
 
     private final ScheduleRepository scheduleRepository;
     private final PhysicianRepository physicianRepository;
@@ -56,6 +52,4 @@ public class AppointmentService {
                 scheduleAppointment.dateTime()
         );
     }
-=======
->>>>>>> Stashed changes:alura/MedVoll/api/src/main/java/med/voll/api/service/AppointmentService.java
 }
