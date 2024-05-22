@@ -1,27 +1,11 @@
-javascript/codeWars/.idea/
-udemy/angular/basics-assignment-1-start/.angular/
-udemy/angular/basics-assignment-2-start/.angular/
-udemy/angular/basics-assignment-2-start/node_modules/
-alura/angular/memoteca/node_modules/
-alura/MedVoll/api/.idea/
-udemy/angular/cmp-databinding-start/node_modules/
-udemy/angular/cmp-databinding-start/.idea/
-udemy/angular/cmp-databinding-start/.angular/
-udemy/angular/basics-assignment-3-start/node_modules/
-udemy/angular/basics-assignment-3-start/.idea/
-udemy/angular/basics-assignment-3-start/.angular/
+.angular/
 
-front/angular/cropper/cropper-js/node_modules/
-front/angular/cropper/cropper-js/.angular/
+node_modules/
 
-blockchain/aula4/node_modules/
-
-alura/jpa/hibernate/Loja/.idea/
-
-alura/MedVoll/api/target/
-
-alura/jpa/hibernate/Loja/target/
+target/
 
 *.iml
 
 blockchain/aula6/node_modules/
+
+.idea/
