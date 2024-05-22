@@ -7,6 +7,20 @@
     <script src="../node_modules/web3/dist/web3.min.js"></script>
 </head>
 <body>
+
+    <script>
+        const web3 = new Web3('http://localhost:7545');
+
+        async function isMining() {
+            let mining = await web3.eth.isMining();
+            console.log("Minerando? ", mining);
+            
+            let block = await web3.eth.getBlockNumber();
+            console.log("Bloco atual -> ", block);
+        }
+
+        isMining();
+    </script>
     
 </body>
 </html>
