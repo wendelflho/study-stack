@@ -15,3 +15,11 @@ front/angular/cropper/cropper-js/node_modules/
 front/angular/cropper/cropper-js/.angular/
 
 blockchain/aula4/node_modules/
+
+alura/jpa/hibernate/Loja/.idea/
+
+alura/MedVoll/api/target/
+
+alura/jpa/hibernate/Loja/target/
+
+*.iml
