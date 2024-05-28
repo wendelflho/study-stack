@@ -19,14 +19,26 @@ void main() {
   // print(registrosVisitados.contains('São Paulo'));
   // print(registrosVisitados.contains('Natal'));
 
-  List<int> numeros = [1, 2, 3, 3, 2, 1];
-  var subLista = numeros.getRange(1, 4);
-  print(subLista);
-  print(subLista.runtimeType);
+  // List<int> numeros = [1, 2, 3, 3, 2, 1];
+  // var subLista = numeros.getRange(1, 4);
+  // print(subLista);
+  // print(subLista.runtimeType);
+  //
+  // List<int> listaSubLista = subLista.toList();
+  // print(listaSubLista);
+  // print(listaSubLista.runtimeType);
 
-  List<int> listaSubLista = subLista.toList();
-  print(listaSubLista);
-  print(listaSubLista.runtimeType);
+  // Map<String, dynamic> registrarPrecos = {};
+
+  // registrarPrecos['São Paulo'] = 1200;
+  // registrarPrecos['Rio de Janeiro'] = 1500;
+  // registrarPrecos['Nova York'] = 'Muito caro';
+  // registrarPrecos.remove('São Paulo');
+
+  // print(registrarPrecos);
+
+  Pessoa twilight = Pessoa(name: 'Twilight', age: 20, isAuthenticated: true);
+  print(twilight.toMap());
 }
 
 Set<String> registrarDestino(String destino, Set<String> banco) {
@@ -59,5 +71,25 @@ enum Transporte {
 
   static void tiposTransporte() {
     print('Carro, bike, andando, skate, avião, patins e trem');
+  }
+}
+
+class Pessoa {
+  String name;
+  int age;
+  bool isAuthenticated;
+
+  Pessoa({
+    required this.name,
+    required this.age,
+    required this.isAuthenticated
+  });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'age': age,
+      'isAuthenticated': isAuthenticated
+    };
   }
 }
