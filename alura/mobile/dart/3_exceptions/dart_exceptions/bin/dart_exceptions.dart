@@ -1,57 +1,42 @@
-import 'dart:io';
-
 import 'controllers/bank_controller.dart';
 import 'models/account.dart';
-
-// void main() {
-//   // Criando o banco
-//   BankController bankController = BankController();
-//
-//   // Adicionando contas
-//   bankController.addAccount(
-//       id: "Ricarth",
-//       account:
-//           Account(name: "Ricarth Lima", balance: 400, isAuthenticated: true));
-//
-//   bankController.addAccount(
-//       id: "Kako",
-//       account:
-//           Account(name: "Caio Couto", balance: 600, isAuthenticated: true));
-//
-//   // Fazendo transferência
-//   bool result = bankController.makeTransfer(
-//       idSender: "Kako", idReceiver: "Ricarth", amount: 700);
-//
-//   // Observando resultado
-//   print(result);
-// }
-
+import 'exceptions/bank_controller_exception.dart';
 
 void main() {
-  print('Started Main');
-  functionOne();
-  print('Finished Main');
-}
+  // Criando o banco
+  BankController bankController = BankController();
 
-functionOne() {
-  print('Started F01');
+  // Adicionando contas
+  // Account accountTeste = Account(name: 'Wendel', balance: -200, isAuthenticated: true);
+  bankController.addAccount(
+      id: "Ricarth",
+      account:
+          Account(name: "Ricarth Lima", balance: 400, isAuthenticated: true));
+
+  bankController.addAccount(
+      id: "Kako",
+      account:
+          Account(name: "Caio Couto", balance: 600, isAuthenticated: true));
+
+  // Fazendo transferência
   try {
-    functionTwo();
-  } catch (e, stackTrace) {
-    print(e);
-    print(stackTrace);
-    // rethrow; Propagar de volta a exceção para quem estiver abaixo na Pilha
-  } finally {
-    print('Chegou no Finally');
-  }
-  print('Finished F01');
-}
+    bool result = bankController.makeTransfer(
+        idSender: "Kako", idReceiver: "Ricarth", amount: 1000);
 
-functionTwo() {
-  print('Started F02');
-  for (int i = 1; i < 5; i++) {
-    print(i);
-    double amount = double.parse("Not a number");
+    if (result) {
+      print('Transação concluída com sucesso!');
+    }
+  } on SenderIdInvalidException catch (e) {
+    print(e);
+  } on ReceiverIdInvalidException catch (e) {
+    print(e);
+  } on SenderNotAuthenticatedException catch(e) {
+    print(e);
+  } on SenderBalanceLowerThanAmountException catch(e) {
+    print(e);
+  } on Exception {
+    print('Algo deu errado!');
   }
-  print('Finished F02');
+
+
 }
